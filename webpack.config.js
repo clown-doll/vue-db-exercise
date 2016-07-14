@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:02:03
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-14 14:48:47
+* @Last Modified time: 2016-07-14 18:00:34
 */
 
 var webpack = require("webpack"),
@@ -21,8 +21,8 @@ module.exports = {
     ],
     // 输出
     output: {
-        filename: 'build.js',
-        path: path.resolve(__dirname, 'dist/')
+        filename: 'js/build.js',
+        path: path.resolve(__dirname, 'dist')
     },
     // 加载器
     module: {
@@ -36,18 +36,6 @@ module.exports = {
                     sass: ExtractTextPlugin.extract("css!sass")
                 })
             },
-            // 编译css
-            /*{
-                test: /\.css$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            },
-            // 编译sass
-            {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
-            },*/
             { 
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
                 loader: "url-loader?limit=10000&mimetype=application/font-woff" 
@@ -68,8 +56,8 @@ module.exports = {
         plugins: ["transform-runtime"]
     }*/,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.js'),
-        new ExtractTextPlugin("style.css", {
+        new webpack.optimize.CommonsChunkPlugin('js/common.js'),
+        new ExtractTextPlugin("css/style.css", {
                 allChunks: true
             }),
         new webpack.HotModuleReplacementPlugin(),
