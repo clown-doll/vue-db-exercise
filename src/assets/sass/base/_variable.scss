@@ -1,0 +1,70 @@
+@charset "UTF-8";
+//----------------------------------------------------- 
+// setting scss
+//----------------------------------------------------- 
+
+// 开关设置
+//----------------------------------------------------- 
+$lte7:                  true !default; //是否兼容ie6-7
+$filter:                false !default; //是否为ie6-8开启css3滤镜兼容，常用于渐变背景 
+$printStyleSwitch:      false !default; //是否开启打印样式
+
+// font相关
+//----------------------------------------------------- 
+$baseFontSize:          108px !default;
+$baseLineHeight:        1.5 !default;
+$baseFontFamily:        "Helvetica Neue", Helvetica, STHeiTi, sans-serif !default;
+
+
+// 元素上下间距
+//----------------------------------------------------- 
+$baseGap:               46px !default;
+
+// 基本颜色
+// color function : http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html
+// lighten($color, $amount)
+// darken($color, $amount)
+// opacify($color, $amount)
+// mix($color1, $color2[, $amount])
+//----------------------------------------------------- 
+$black:                 #000 !default;
+$grayDarker:            #494949 !default;
+$grayDark:              #4a4a4a !default;
+$gray:                  #9b9b9b !default;
+$grayLight:             #ccc !default;
+$grayLighter:           #e4e4e4 !default;
+$white:                 #fff !default;
+
+$red:                   #ff4055 !default;
+$blueDark:              #0064cd !default;
+$orange:                #ffac2d !default;
+$green:                 #42bd56 !default;
+$yellow:                #ffb712 !default;
+
+$primary:               #0078E7 !default;//主色
+
+
+// link
+//----------------------------------------------------- 
+// 如果只有一个值则滑过的值为这个值的darken 5%，如果
+// 有两个值则第二个值为滑过的值
+$linkColor:             $green !default;
+
+
+// scaffolding
+//----------------------------------------------------- 
+$bodyBgColor:           #f7f7f7 !default;
+$panelBgColor:          $white !default;
+$textColor:             $grayDarker !default;
+
+
+// placeholder
+//----------------------------------------------------- 
+// 变量分别为：是否输出表单的占位符placeholder样式，文本色
+$placeholder:           true $gray !default;
+
+// radius
+//----------------------------------------------------- 
+$baseRadius:            5px !default;
+$smallRadius:           3px !default;
+$fullRadius:            50% !default;
