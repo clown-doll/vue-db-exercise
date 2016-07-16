@@ -17,13 +17,13 @@ module.exports = {
     // 入口文件地址
     entry: [
         "webpack-dev-server/client?http://localhost:8080/",
-        "webpack/hot/only-dev-server",
+        "webpack/hot/dev-server",
         path.resolve(__dirname, 'src/app.js')
     ],
     // 输出
     output: {
-        filename: 'build.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'js/build.js',
+        path: __dirname + '/dist'
     },
     // 加载器
     module: {
@@ -34,16 +34,20 @@ module.exports = {
                 test: /\.vue$/,
                 exclude: /node_modules/,
                 loader: vue.withLoaders({
-                    sass: ExtractTextPlugin.extract("css!sass")
+                    sass: ExtractTextPlugin.extract("style", "css!sass", {
+                        publicPath: "../"
+                    })
                 })
             },
-            { 
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "url-loader?limit=10000&mimetype=application/font-woff" 
+            {
+                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                exclude: /node_modules/,
+                loader: "url-loader?limit=1024&name=fonts/[name].[ext]"
             },
-            { 
-                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-                loader: "file-loader" 
+            {
+                test: /\.(jpg|jpeg|gif|png)$/,
+                exclude: /node_modules/,
+                loader: "url-loader?limit=1024&name=images/[name].[ext]"
             },
             {
                 test: /\.js$/,
@@ -57,8 +61,9 @@ module.exports = {
         plugins: ["transform-runtime"]
     }*/,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.js'),
-        new ExtractTextPlugin("style.css", {
+        new webpack.optimize.CommonsChunkPlugin('js/common.js'),
+        new ExtractTextPlugin("css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]", {
+                disable: false,
                 allChunks: true
             }),
         new webpack.HotModuleReplacementPlugin(),
@@ -72,5 +77,8 @@ module.exports = {
     // 服务器配置相关，自动刷新!
     devServer: {
         contentBase: 'dist'
+    },
+    externals: {
+        "./src/libs/flexible.js": "window.flexible"
     }
 }

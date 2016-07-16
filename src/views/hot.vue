@@ -1,17 +1,34 @@
 <style lang="sass">
-    
+    @import "../assets/sass/setting";
+
+    .panel{
+    	margin-top: pxTorem($baseGap);
+        padding: pxTorem(46px) pxTorem(42px);
+        background-color: $panelBgColor;
+        border-bottom: 1px solid $grayLighter;
+    }
+
 </style>
 
 <template>
-    hot
+	<div class="panel">
+        <panel-header></panel-header>
+        <ul>
+        	<star-item></star-item>
+        </ul>
+    </div>
 </template>
 
 <script>
-    var onlineMoviePanel = require("../components/panel.vue");
+	var panelHeaderComponent = require("../components/panel-header.vue"),
+		starItemComponent = require("../components/item-has-star.vue");
+
 
     module.exports = {
         components: {
-            "online-movie-panel": onlineMoviePanel
+            "panel-header": panelHeaderComponent,
+            "star-item": starItemComponent
         }
     }
+   
 </script>

@@ -2,7 +2,7 @@
     @import "../assets/sass/setting";
     @import "../assets/sass/base/reset";
 
-    $fontClassoutput: glass music search times;
+    $fontClassoutput: arrow-right search;
     @import "../assets/sass/font-face/font-face";
 
     .index-header{
@@ -11,6 +11,7 @@
         height: pxTorem(168px);
         line-height: pxTorem(168px);
         text-align: center;
+        font-size: pxTorem(50px);
         .icon-search{
             padding: 4px;
             position: absolute;
@@ -32,7 +33,7 @@
             border-bottom: pxTorem(4px) solid transparent;
             text-align: center;
             line-height: pxTorem(120px);
-            //font-weight: 700;
+            font-size: pxTorem(44px);
             color: $gray;
             &.v-link-active{
                 color: $green;
