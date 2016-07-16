@@ -1,4 +1,4 @@
-<style lang="Sass">
+<style lang="sass">
     @import "../assets/sass/setting";
 
     .panel{

@@ -12,16 +12,17 @@ var webpack = require("webpack"),
 
 
 
+
 module.exports = {
     // 入口文件地址
     entry: [
         "webpack-dev-server/client?http://localhost:8080/",
         "webpack/hot/only-dev-server",
-        "./src/app.js"
+        path.resolve(__dirname, 'src/app.js')
     ],
     // 输出
     output: {
-        filename: 'js/build.js',
+        filename: 'build.js',
         path: path.resolve(__dirname, 'dist')
     },
     // 加载器
@@ -56,8 +57,8 @@ module.exports = {
         plugins: ["transform-runtime"]
     }*/,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('js/common.js'),
-        new ExtractTextPlugin("css/style.css", {
+        new webpack.optimize.CommonsChunkPlugin('common.js'),
+        new ExtractTextPlugin("style.css", {
                 allChunks: true
             }),
         new webpack.HotModuleReplacementPlugin(),
