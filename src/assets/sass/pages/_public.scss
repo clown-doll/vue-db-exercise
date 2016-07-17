@@ -1,0 +1,30 @@
+.panel{
+	margin-top: pxTorem($baseGap);
+    padding: pxTorem(50px) pxTorem(42px);
+    background-color: $panelBgColor;
+    border-bottom: 1px solid $grayLighter;
+}
+
+.list-item{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: pxTorem(30px) 0 0;
+	li{
+		width: pxTorem(276px);
+		span{
+			font-size: pxTorem(32px);
+		}
+		.score{
+			padding-left: pxTorem(12px);
+			color: $gray;
+		}
+		.original-price{
+			color: $grayLight;
+			text-decoration: line-through;
+		}
+		.new-price{
+			color: $red;
+		}
+	}
+}

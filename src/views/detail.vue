@@ -1,11 +1,11 @@
-<style lang="sass">
-    
+<style>
+	
 </style>
 
 <template>
-    tv
+	detail
 </template>
 
 <script>
-    
+	
 </script>

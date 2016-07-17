@@ -10,7 +10,12 @@ require("./libs/flexible");
 
 var Vue = require("vue"),
     App = Vue.extend({}),
-    VueRouter = require("vue-router");
+    VueRouter = require("vue-router"),
+    VueResource = require('vue-resource');
+
+Vue.use(VueResource);
+
+Vue.http.options.root = "https://api.douban.com/v2";
 
 
 Vue.use(VueRouter);
@@ -25,19 +30,13 @@ router.map({
 		component: require("./views/index.vue"),
 		subRoutes: {
 			"/": {
-				component: require("./views/hot.vue")
-			},
-			"/hot": {
-				component: require("./views/hot.vue")
+				component: require("./views/movie.vue")
 			},
 			"/movie": {
 				component: require("./views/movie.vue")
 			},
 			"/read": {
 				component: require("./views/read.vue")
-			},
-			"/tv": {
-				component: require("./views/tv.vue")
 			},
 			"/activity": {
 				component: require("./views/activity.vue")
@@ -46,16 +45,22 @@ router.map({
 				component: require("./views/music.vue")
 			}
 		}
+	},
+	"/detail/:id": {
+		name: "detail",
+		component: require("./views/detail.vue")
 	}
 })
 
 
 //默认/重定向到home页
 router.redirect({
-    '/':"index/hot"
+    '/':"index/movie"
 })
 
 router.start(App, '#app');
+
+
 
 
 

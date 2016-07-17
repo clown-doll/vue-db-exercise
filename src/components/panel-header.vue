@@ -17,7 +17,13 @@
 
 <template>
 	<header class="panel-header">
-        <h3>影院热映</h3>
+        <h3>{{title}}</h3>
         <a href="#">更多 &gt;</i></a>
     </header>
 </template>
+
+<script>
+	module.exports = {
+		props: ["title"]
+	}
+</script>
