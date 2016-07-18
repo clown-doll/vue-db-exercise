@@ -4,6 +4,8 @@
 </style>
 
 <template>
+    <loading v-show="showLoading" ></loading>
+
     <!-- 影院热映 -->
     <div class="panel">
         <panel-header v-bind:title="onlinesPanelTitle"></panel-header>
@@ -41,9 +43,10 @@
 <script>
     var panelHeaderComponent = require("../components/panel-header.vue"),
 		itemContentComponent = require("../components/item-content.vue"),
-		starsComponent = require("../components/star.vue");
+		starsComponent = require("../components/star.vue"),
+        loadingComponent = require("../components/loading.vue");
 
-
+    
     module.exports = {
     	data: function(){
     		return {
@@ -54,25 +57,37 @@
     			},
     			comingSoonData: {
     				subjects: []
-    			}
+    			},
+                showLoading: false
     		}
     	},
     	ready: function(){
-    		this.$http.jsonp("movie/in_theaters")
-    				.then(function(response){
-    					this.$set("onlinesData", response.data);
-    				});
-
-    		this.$http.jsonp("movie/coming_soon")
-    				.then(function(response){
-    					this.$set("comingSoonData", response.data);
-    				});
-
+    		this.getOnlineMovies();
+    		this.getComingSoonMovies();
     	},
         components: {
             "panel-header": panelHeaderComponent,
             "item-content": itemContentComponent,
-            "stars": starsComponent
+            "stars": starsComponent,
+            "loading": loadingComponent
+        },
+        methods: {
+            getOnlineMovies: function() {
+                var vm = this;
+
+                vm.$http.jsonp("movie/in_theaters")
+                    .then(function(response){
+                        this.$set("onlinesData", response.data);
+                    });
+            },
+            getComingSoonMovies: function() {
+                var vm = this;
+
+                vm.$http.jsonp("movie/coming_soon")
+                    .then(function(response){
+                        this.$set("comingSoonData", response.data);
+                    });
+            }
         }
     }
 </script>

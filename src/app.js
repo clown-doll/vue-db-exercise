@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:18:20
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-14 10:07:02
+* @Last Modified time: 2016-07-18 14:28:05
 */
 
 
@@ -16,6 +16,15 @@ var Vue = require("vue"),
 Vue.use(VueResource);
 
 Vue.http.options.root = "https://api.douban.com/v2";
+
+// loading拦截
+Vue.http.interceptors.push(function (request, next) {
+    this.showLoading = true;
+    next(function (response) {
+        this.showLoading = false;
+        return response;
+    });
+});
 
 
 Vue.use(VueRouter);
