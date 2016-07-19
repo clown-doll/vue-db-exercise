@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:18:20
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-19 17:19:07
+* @Last Modified time: 2016-07-19 19:36:05
 */
 
 
@@ -30,39 +30,16 @@ Vue.http.interceptors.push(function (request, next) {
 Vue.use(VueRouter);
 
 var router = new VueRouter({
-	//hash路由
 	hasbang: true 
 });
 
-/*router.map({
-	"/index": {
-		component: require("./views/index.vue"),
-		subRoutes: {
-			"/": {
-				component: require("./views/movie.vue")
-			},
-			"/movie": {
-				component: require("./views/movie.vue")
-			},
-			"/read": {
-				component: require("./views/read.vue")
-			},
-			"/activity": {
-				component: require("./views/activity.vue")
-			},
-			"/music": {
-				component: require("./views/music.vue")
-			}
-		}
-	},
-	"/detail/:id": {
-		name: "detail",
-		component: require("./views/detail.vue")
-	}
-})*/
+
+//结合webpack异步加载业务模块
 router.map({
     "/index": {
-        component: require("./views/index.vue"),
+        component: function(resolve) {
+            require(["./views/index.vue"], resolve)
+        },
         subRoutes: {
             "/": {
                 component: function(resolve) {
@@ -93,7 +70,9 @@ router.map({
     },
     "/detail/:id": {
         name: "detail",
-        component: require("./views/detail.vue")
+        component: function(resolve) {
+            require(["./views/detail.vue"], resolve)
+        }
     }
 })
 
