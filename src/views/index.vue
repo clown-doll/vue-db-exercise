@@ -2,7 +2,7 @@
     @import "../assets/sass/setting";
     @import "../assets/sass/base/reset";
 
-    $fontClassoutput: arrow-right search star;
+    $fontClassoutput: chevron-right chevron-left search star thumbs-o-up;
     @import "../assets/sass/font-face/font-face";
 
     .index-header{
@@ -60,5 +60,5 @@
 </template>
 
 <script>
-    //require("../libs/flexible");
+   
 </script>

@@ -32,7 +32,6 @@
 	        		<stars></stars>
 	        		<span class="score">{{item.rating.average}}</span>
         		</a>
-        		
         	</li>
         </ul>
     </div>

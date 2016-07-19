@@ -3,7 +3,7 @@
 
 	.item-img{
 		width: 100%;
-		height: pxTorem(380px);
+		//height: pxTorem(380px);
 		overflow: hidden;
 		img{
 			width: 100%;

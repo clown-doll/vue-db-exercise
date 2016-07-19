@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:18:20
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-18 14:28:05
+* @Last Modified time: 2016-07-19 17:19:07
 */
 
 
@@ -34,7 +34,7 @@ var router = new VueRouter({
 	hasbang: true 
 });
 
-router.map({
+/*router.map({
 	"/index": {
 		component: require("./views/index.vue"),
 		subRoutes: {
@@ -59,6 +59,42 @@ router.map({
 		name: "detail",
 		component: require("./views/detail.vue")
 	}
+})*/
+router.map({
+    "/index": {
+        component: require("./views/index.vue"),
+        subRoutes: {
+            "/": {
+                component: function(resolve) {
+                    require(["./views/movie.vue"], resolve)
+                }
+            },
+            "/movie": {
+                component: function(resolve) {
+                    require(["./views/movie.vue"], resolve)
+                }
+            },
+            "/read": {
+                component: function(resolve) {
+                    require(["./views/read.vue"], resolve)
+                }
+            },
+            "/activity": {
+                component: function(resolve) {
+                    require(["./views/activity.vue"], resolve)
+                }
+            },
+            "/music": {
+                component: function(resolve) {
+                    require(["./views/music.vue"], resolve)
+                }
+            }
+        }
+    },
+    "/detail/:id": {
+        name: "detail",
+        component: require("./views/detail.vue")
+    }
 })
 
 

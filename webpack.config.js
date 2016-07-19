@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:02:03
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-14 18:00:34
+* @Last Modified time: 2016-07-19 16:24:28
 */
 
 var webpack = require("webpack"),
@@ -20,6 +20,15 @@ module.exports = {
         "webpack/hot/dev-server",
         path.resolve(__dirname, 'src/app.js')
     ],
+    /*entry: {
+        app: [
+            "webpack-dev-server/client?http://localhost:8080/",
+            "webpack/hot/dev-server",
+            path.resolve(__dirname, 'src/app.js')
+        ]
+        // ,
+        // vendor: __dirname + '/src/vendor'  
+    },*/
     // 输出
     output: {
         filename: 'js/build.js',
@@ -61,11 +70,21 @@ module.exports = {
         plugins: ["transform-runtime"]
     }*/,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('js/common.js'),
+        new webpack.ProvidePlugin({  
+            $: "jquery",  
+            jQuery: "jquery",  
+            "window.jQuery": "jquery"  
+        }), 
+        /*new webpack.optimize.CommonsChunkPlugin({
+            name: "js/vendor.js",
+            minChunks : 2  
+        }),*/
+        new webpack.optimize.CommonsChunkPlugin("js/vendor.js"),
         new ExtractTextPlugin("css/[name].css?[hash]-[chunkhash]-[contenthash]-[name]", {
                 disable: false,
                 allChunks: true
             }),
+        new webpack.optimize.DedupePlugin(),  
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.UglifyJsPlugin({
                 compress: {
