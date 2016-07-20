@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:02:03
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-19 19:35:14
+* @Last Modified time: 2016-07-20 10:21:33
 */
 
 var webpack = require("webpack"),
@@ -26,7 +26,7 @@ module.exports = {
     output: {
         filename: 'js/build.js',
         path: __dirname + '/dist',
-        chunkFilename: "[name].chunk.js"
+        chunkFilename: "js/[name].chunk.js"
     },
     // 加载器
     module: {

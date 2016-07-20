@@ -14,10 +14,10 @@
 		width: pxTorem(276px);
 		span{
 			font-size: pxTorem(32px);
+			color: $gray;
 		}
 		.score{
 			padding-left: pxTorem(12px);
-			color: $gray;
 		}
 		.original-price{
 			color: $grayLight;

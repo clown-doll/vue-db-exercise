@@ -13,8 +13,11 @@
         	<li v-for="item in onlinesData.subjects | limitBy 3">
         		<a v-link="{ name: 'detail', params: { id:item.id} }">
         			<item-content v-bind:img="item.images.medium" v-bind:title="item.original_title"></item-content>
-	        		<stars></stars>
-	        		<span class="score">{{item.rating.average}}</span>
+	        		<template v-if="item.rating.average > 0">
+                        <stars></stars>
+                        <span class="score">{{item.rating.average}}</span>
+                    </template>
+                    <span v-else>暂无评分</span>
         		</a>
         		
         	</li>
@@ -29,8 +32,11 @@
         	<li v-for="item in comingSoonData.subjects | limitBy 3">
         		<a v-link="{ name: 'detail', params: { id:item.id} }">
         			<item-content v-bind:img="item.images.medium" v-bind:title="item.original_title"></item-content>
-	        		<stars></stars>
-	        		<span class="score">{{item.rating.average}}</span>
+	        		<template v-if="item.rating.average > 0">
+                        <stars></stars>
+                        <span class="score">{{item.rating.average}}</span>
+                    </template>
+                    <span v-else>暂无评分</span>
         		</a>
         	</li>
         </ul>

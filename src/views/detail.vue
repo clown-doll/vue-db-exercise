@@ -96,7 +96,6 @@
                 li{
                     padding-right: pxTorem(24px);
                     width: pxTorem(270px);
-                    //height: pxTorem(390px);
                     overflow: hidden;
                     text-align: center;
                 }
@@ -109,9 +108,9 @@
 	<loading v-show="showLoading" ></loading>
     
     <div class="covers">
-        <img v-bind:src="detailData.images.large" class="img-blur" alt="">
+        <img v-bind:src="detailData.images.large" class="img-blur" alt="{{detailData.title}}">
         <a href="#" class="back icon-chevron-left"></a> 
-        <img v-bind:src="detailData.images.large" alt="" class="img">
+        <img v-bind:src="detailData.images.large" alt="{{detailData.title}}" class="img">
     </div>
     <article class="detail">
         <header>
@@ -122,14 +121,16 @@
                 {{detailData.ratings_count}} 人评分
             </div>
             <a href="#" class="info">
-                {{detailData.directors[0].name}}（导演）/
-                <span v-for="people in detailData.casts">
+                <template v-for="director in detailData.directors">
+                    {{director.name}}（导演）/
+                </template>
+                <template v-for="people in detailData.casts">
                     {{people.name}}/
-                </span>
-                <span v-for="genre in detailData.genres">
+                </template>
+                <template v-for="genre in detailData.genres">
                     {{genre}}/
-                </span>
-                {{detailData.year}}（{{detailData.countries[0]}}）
+                </template>
+                {{detailData.year}}（<template v-for="country in detailData.countries">{{country}} </template>）
                 <i class="icon-chevron-right"></i>
             </a>
         </header>
@@ -142,8 +143,9 @@
             <h3>影人</h3>
             <div class="casts">
                 <ul class="casts-list" id="castsList">
-                    <li>
-                        <item-content v-bind:img="detailData.directors[0].avatars.medium" v-bind:title="detailData.directors[0].name"></item-content>
+                    <li v-for="director in detailData.directors">
+                        <item-content v-bind:img="director.avatars.medium" v-bind:title="director.name"></item-content>
+                        <span>导演</span>
                     </li>
                     <li v-for="people in detailData.casts">
                         <item-content v-bind:img="people.avatars.medium" v-bind:title="people.name"></item-content>
@@ -151,30 +153,22 @@
                 </ul>
             </div>
         </section>
-        <!-- <section>
-            <h3>短评</h3>
-            <comment-item></comment-item>
-            <a href="#" class="more">更多短评{{detailData.comments_count}}条</a>
-        </section>
-        <section>
-            <h3>影评</h3>
-            <comment-item></comment-item>
-            <a href="#" class="more">更多影评{{detailData.reviews_count}}条</a>
-        </section> -->
     </article>
 </template>
 
 <script>
 	var itemContentComponent = require("../components/item-content.vue"),
         starsComponent = require("../components/star.vue"),
-        //commentItemComponent = require("../components/comment.vue"),
         loadingComponent = require("../components/loading.vue");
 
     module.exports = {
         data: function(){
             return {
                 showLoading: false,
-                detailData: {}
+                detailData: {
+                    images: {},
+                    rating: {}
+                }
             }
         },
         ready: function(){
@@ -184,7 +178,6 @@
         components: {
             "item-content": itemContentComponent,
             "stars": starsComponent,
-            //"comment-item": commentItemComponent,
             "loading": loadingComponent
         },
         methods: {
@@ -204,23 +197,6 @@
                         $("#castsList").width(castsLen*baseWidth + castsLen*12);
                     });
             }
-            // ,
-            // getComments: function(id) {
-            //     var vm = this;
-
-            //     vm.$http.jsonp("movie/subject/" + id + "/comments")
-            //         .then(function(response){
-            //             this.$set("commentsData", response.data);
-            //         });
-            // },
-            // getReviews: function(id) {
-            //     var vm = this;
-
-            //     vm.$http.jsonp("movie/subject/" + id + "/reviews")
-            //         .then(function(response){
-            //             this.$set("reviewsData", response.data);
-            //         });
-            // }
         }
     }
 </script>
