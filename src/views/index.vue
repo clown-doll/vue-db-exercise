@@ -49,14 +49,13 @@
         <i class="icon-search"></i>
     </header>
     <nav class="nav-tab">
-        <!-- <a v-link="{ path: '/index/hot' }">热门</a> -->
         <a v-link="{ path: '/index/movie' }">电影</a>
         <a v-link="{ path: '/index/read' }">读书</a>
-        <!-- <a v-link="{ path: '/index/tv' }">电视</a> -->
         <a v-link="{ path: '/index/activity' }">活动</a>
         <a v-link="{ path: '/index/music' }">音乐</a>
     </nav>
-    <router-view></router-view>
+    <!-- keep-alive, 缓存请求数据 -->
+    <router-view keep-alive></router-view>
 </template>
 
 <script>

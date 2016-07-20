@@ -82,7 +82,7 @@
 
                 vm.$http.jsonp("movie/in_theaters")
                     .then(function(response){
-                        this.$set("onlinesData", response.data);
+                        vm.onlinesData = response.data;
                     });
             },
             getComingSoonMovies: function() {
@@ -90,7 +90,7 @@
 
                 vm.$http.jsonp("movie/coming_soon")
                     .then(function(response){
-                        this.$set("comingSoonData", response.data);
+                        vm.comingSoonData = response.data;
                     });
             }
         }

@@ -109,7 +109,7 @@
     
     <div class="covers">
         <img v-bind:src="detailData.images.large" class="img-blur" alt="{{detailData.title}}">
-        <a href="#" class="back icon-chevron-left"></a> 
+        <a v-link="{ path: goBackPath}"  class="back icon-chevron-left"></a> 
         <img v-bind:src="detailData.images.large" alt="{{detailData.title}}" class="img">
     </div>
     <article class="detail">
@@ -168,12 +168,34 @@
                 detailData: {
                     images: {},
                     rating: {}
-                }
+                },
+                goBackPath: ""
             }
         },
-        ready: function(){
-            var subjectId = this.getId();
-            this.getDetail(subjectId);
+        route: {
+            // data在每次路由变动时都会被调用
+            data: function(transition){
+                var backPath = transition.from.path,
+                    subjectId = transition.to.params.id;
+
+                /* 
+                 *  判断当前请求参数是否与sesstionStorage中保存的值相等
+                 *  相等的话重新请求
+                 *  否则不重新请求
+                */
+                if (subjectId === sessionStorage.searchKey) {
+                    this.showLoading = false
+                }else{
+                    this.getDetail(subjectId);
+                }
+
+                // 设置sessionStorage值，保存请求参数
+                sessionStorage.setItem('searchKey', subjectId);
+
+                return {
+                    goBackPath: backPath
+                }
+            }
         },
         components: {
             "item-content": itemContentComponent,
@@ -182,14 +204,13 @@
         },
         methods: {
             getId: function(){
-                var pathArr = window.location.hash.split("/");
-                return pathArr[pathArr.length-1];
+                return this.$route.params.id;
             },
             getDetail: function(id) {
                 var vm = this;
                 vm.$http.jsonp("movie/subject/" + id)
                     .then(function(response){
-                        vm.$set("detailData", response.data);
+                        vm.detailData = response.data;
 
                         var castsLen = vm.detailData.casts.length,
                             baseWidth = $("#castsList li").outerWidth();
