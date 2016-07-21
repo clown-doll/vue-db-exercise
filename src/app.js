@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:18:20
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-20 13:46:12
+* @Last Modified time: 2016-07-21 08:52:30
 */
 
 
@@ -37,9 +37,6 @@ var router = new VueRouter({
 //结合webpack异步加载业务模块
 router.map({
     "/index": {
-        /*component: function(resolve) {
-            require(["./views/index.vue"], resolve)
-        },*/
         component: require("./views/index.vue"),
         subRoutes: {
             "/": {

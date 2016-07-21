@@ -10,7 +10,7 @@
     <div class="panel">
         <panel-header v-bind:title="onlinesPanelTitle"></panel-header>
         <ul class="list-item">
-        	<li v-for="item in onlinesData.subjects | limitBy 3">
+        	<li v-for="item in onlinesData.subjects | limitBy 3" track-by="id">
         		<a v-link="{ name: 'detail', params: { id:item.id} }">
         			<item-content v-bind:img="item.images.medium" v-bind:title="item.original_title"></item-content>
 	        		<template v-if="item.rating.average > 0">
@@ -29,7 +29,7 @@
     <div class="panel">
         <panel-header v-bind:title="comingSoonPanelTitle"></panel-header>
         <ul class="list-item">
-        	<li v-for="item in comingSoonData.subjects | limitBy 3">
+        	<li v-for="item in comingSoonData.subjects | limitBy 3"  track-by="id">
         		<a v-link="{ name: 'detail', params: { id:item.id} }">
         			<item-content v-bind:img="item.images.medium" v-bind:title="item.original_title"></item-content>
 	        		<template v-if="item.rating.average > 0">
