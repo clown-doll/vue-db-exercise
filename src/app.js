@@ -2,19 +2,23 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:18:20
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-21 08:52:30
+* @Last Modified time: 2016-07-22 09:25:25
 */
 
+"use strict";
 
-require("./libs/flexible");
+import Vue from "vue";
+import VueRouter from "vue-router";
+import VueResource from "vue-resource";
+import routerMap from "./routermap";
+import flexible from "./libs/flexible";
 
-var Vue = require("vue"),
-    App = Vue.extend({}),
-    VueRouter = require("vue-router"),
-    VueResource = require('vue-resource');
+let App = Vue.extend({});
 
 Vue.use(VueResource);
+Vue.use(VueRouter);
 
+// 设置接口根路径
 Vue.http.options.root = "https://api.douban.com/v2";
 
 // loading拦截
@@ -27,54 +31,17 @@ Vue.http.interceptors.push(function (request, next) {
 });
 
 
-Vue.use(VueRouter);
-
-var router = new VueRouter({
-	hasbang: true 
+let router = new VueRouter({
+    hashbang: true
 });
-
-
-//结合webpack异步加载业务模块
-router.map({
-    "/index": {
-        component: require("./views/index.vue"),
-        subRoutes: {
-            "/": {
-                component: require("./views/movie.vue")
-            },
-            "/movie": {
-                component: require("./views/movie.vue")
-            },
-            "/read": {
-                component: function(resolve) {
-                    require(["./views/read.vue"], resolve)
-                }
-            },
-            "/activity": {
-                component: function(resolve) {
-                    require(["./views/activity.vue"], resolve)
-                }
-            },
-            "/music": {
-                component: function(resolve) {
-                    require(["./views/music.vue"], resolve)
-                }
-            }
-        }
-    },
-    "/detail/:id": {
-        name: "detail",
-        component: function(resolve) {
-            require(["./views/detail.vue"], resolve)
-        }
-    }
-})
-
 
 //默认/重定向到home页
 router.redirect({
-    '/':"index/movie"
-})
+    '/':"/movie"
+});
+
+// 路由列表
+routerMap(router);
 
 router.start(App, '#app');
 

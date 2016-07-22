@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2016-07-14 09:02:03
 * @Last Modified by:   Administrator
-* @Last Modified time: 2016-07-20 10:21:33
+* @Last Modified time: 2016-07-22 09:27:54
 */
 
 var webpack = require("webpack"),
@@ -58,11 +58,11 @@ module.exports = {
                 loader: "babel"
             }
         ]
-    }/*,
+    },
     babel: {
-        presets: ["es2015", "stage-0"],
+        presets: ["es2015"],
         plugins: ["transform-runtime"]
-    }*/,
+    },
     plugins: [
         new webpack.ProvidePlugin({  
             $: "jquery",  
